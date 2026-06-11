@@ -34,7 +34,6 @@ Qualquer pessoa que leia livros e queira manter um registro pessoal simples, org
 ![Bookshelf Tracker](preview/Bookshelf-add.png)
 ![Bookshelf Tracker](preview/Bookshelf-form.png)
 ![Bookshelf Tracker](preview/Bookshelf-1.png)
-![Bookshelf Tracker](preview/Tests.png)
 
 ## Tecnologias
 
