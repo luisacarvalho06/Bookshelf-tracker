@@ -8,4 +8,3 @@ key = os.environ.get("SUPABASE_KEY")
 
 if url and key:
     supabase = create_client(url, key)
-    
