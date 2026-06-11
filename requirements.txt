@@ -5,3 +5,4 @@ ruff
 requests
 gunicorn
 python-dotenv
+supabase

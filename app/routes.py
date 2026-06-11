@@ -1,9 +1,9 @@
 import os
 import json
-import requests
 from flask import Blueprint, jsonify, request, render_template, send_file
 from werkzeug.utils import secure_filename
-from app.data_store import books, save_books
+import requests as http_requests
+from app.database import supabase
 
 bp = Blueprint("main", __name__)
 
@@ -21,7 +21,8 @@ def index():
 
 @bp.route("/books", methods=["GET"])
 def get_books():
-    return jsonify(books)
+    result = supabase.table("books").select("*").order("created_at").execute()
+    return jsonify(result.data)
 
 
 @bp.route("/books/search", methods=["GET"])
@@ -31,14 +32,14 @@ def search_book():
         return jsonify({"error": "Parâmetro q é obrigatório"}), 400
 
     try:
-        res = requests.get(
+        res = http_requests.get(
             "https://openlibrary.org/search.json",
             params={"title": query, "limit": 15},
             timeout=5
         )
         res.raise_for_status()
         data = res.json()
-    except requests.exceptions.RequestException as e:
+    except http_requests.exceptions.RequestException as e:
         return jsonify({
             "error": "Falha ao conectar com Open Library",
             "details": str(e)
@@ -100,26 +101,24 @@ def add_book():
         "cover_url": cover_url
     }
 
-    books.append(book)
-    save_books(books)
-    return jsonify({"success": True, "book": book}), 201
+    result = supabase.table("books").insert(book).execute()
+    return jsonify({"success": True, "book": result.data[0]}), 201
 
 
-@bp.route("/books/<int:index>", methods=["DELETE"])
-def delete_book(index):
-    try:
-        removed = books.pop(index)
-        save_books(books)
-        return jsonify({"success": True, "removed": removed})
-    except IndexError:
+@bp.route("/books/<string:book_id>", methods=["DELETE"])
+def delete_book(book_id):
+    result = supabase.table("books").delete().eq("id", book_id).execute()
+    if not result.data:
         return jsonify({"error": "Livro não encontrado"}), 404
+    return jsonify({"success": True, "removed": result.data[0]})
 
 
 @bp.route("/books/export", methods=["GET"])
 def export_books():
+    result = supabase.table("books").select("*").execute()
     path = os.path.join(os.getcwd(), "books_export.json")
     with open(path, "w") as f:
-        json.dump(books, f, ensure_ascii=False, indent=2)
+        json.dump(result.data, f, ensure_ascii=False, indent=2)
     return send_file(path, as_attachment=True)
 
 
@@ -129,7 +128,5 @@ def import_books():
     if not file:
         return jsonify({"error": "Nenhum arquivo enviado"}), 400
     data = json.load(file)
-    books.clear()
-    books.extend(data)
-    save_books(books)
+    supabase.table("books").insert(data).execute()
     return jsonify({"success": True, "count": len(data)})

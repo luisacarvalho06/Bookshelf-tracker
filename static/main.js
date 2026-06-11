@@ -233,7 +233,8 @@ function renderBooks() {
 }
 
 async function deleteBook(index) {
-    await fetch(`/books/${index}`, { method: "DELETE" });
+    const book = books[index];
+    await fetch(`/books/${book.id}`, { method: "DELETE" });
     currentIndex = 0;
     await loadBooks();
 }
