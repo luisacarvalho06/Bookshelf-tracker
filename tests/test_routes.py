@@ -1,16 +1,18 @@
 import pytest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, Mock, MagicMock
 from app import create_app
 
 
 @pytest.fixture
 def client():
-    app = create_app()
-    app.config["TESTING"] = True
+    with patch("app.routes.supabase") as mock_supabase:
+        mock_supabase.table.return_value.select.return_value.order.return_value.execute.return_value.data = []
 
-    with app.test_client() as client:
-        yield client
+        app = create_app()
+        app.config["TESTING"] = True
 
+        with app.test_client() as client:
+            yield client
 
 def test_search_sem_parametro(client):
     response = client.get("/books/search")
