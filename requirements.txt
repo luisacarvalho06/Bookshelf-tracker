@@ -1,0 +1,7 @@
+flask
+pytest
+werkzeug
+ruff
+requests
+gunicorn
+python-dotenv

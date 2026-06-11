@@ -1,0 +1,9 @@
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+
+[project]
+name = "bookshelf-tracker"
+version = "1.0.0"
