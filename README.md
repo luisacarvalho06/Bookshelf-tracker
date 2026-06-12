@@ -12,12 +12,16 @@ Para quem quer apenas um diário de leituras simples, local e privado, essas pla
 
 ## A Solução
 
-O **Bookshelf Tracker** é uma aplicação web que roda localmente, sem cadastro, sem rastreamento e sem dependência de serviços externos.
-É um diário de leituras minimalista: você registra, organiza e revisita seus livros com total controle sobre seus dados.
+O **Bookshelf Tracker** é uma aplicação web conectada à nuvem, sem cadastro, sem rastreamento.
+É um diário de leituras minimalista: você registra, organiza e revisita seus livros com total controle sobre seus dados, persistidos em banco de dados na nuvem via Supabase.
 
 ## Público-alvo
 
 Qualquer pessoa que leia livros e queira manter um registro pessoal simples, organizado e visualmente agradável de suas leituras.
+
+## Deploy
+
+ Acesse a aplicação em produção: https://bookshelf-tracker-2e22.onrender.com
 
 ## Funcionalidades
 
@@ -43,6 +47,7 @@ Qualquer pessoa que leia livros e queira manter um registro pessoal simples, org
 - pytest
 - ruff
 - Supabase (PostgreSQL)
+- Render (Deploy)
 
 ## Dependências
 
