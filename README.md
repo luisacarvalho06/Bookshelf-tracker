@@ -38,7 +38,7 @@ Qualquer pessoa que leia livros e queira manter um registro pessoal simples, org
 ![Bookshelf Tracker](preview/Bookshelf-add.png)
 ![Bookshelf Tracker](preview/Bookshelf-form.png)
 ![Bookshelf Tracker](preview/Bookshelf-1.png)
-![Bookshelf Tracker](<img width="595" height="174" alt="Bookshelf-test" src="https://github.com/user-attachments/assets/033e8a9c-0023-4952-a022-c178ff43ffaa" />
+<img width="595" height="174" alt="Bookshelf-test" src="https://github.com/user-attachments/assets/033e8a9c-0023-4952-a022-c178ff43ffaa" />
 
 
 ## Tecnologias
