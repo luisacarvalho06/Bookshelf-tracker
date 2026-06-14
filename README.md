@@ -21,17 +21,18 @@ Qualquer pessoa que leia livros e queira manter um registro pessoal simples, org
 
 ## Deploy
 
- Acesse a aplicação em produção: https://bookshelf-tracker-2e22.onrender.com
+Acesse a aplicação em produção: 
+https://bookshelf-tracker-2e22.onrender.com
 
 ## Funcionalidades
 
 - Adicionar livros com capa, título, autor, gênero, ano de publicação, avaliação (1-10 estrelas) e review pessoal
-- Buscar livros pelo título e automaticamente resgatar capa, autor e ano via API Open Library
+- Buscar livros pelo título em inglês clicando na lupa — a capa, autor e ano são preenchidos automaticamente via API Open Library
 - Navegar entre os livros em um slider de cards
 - Registrar a data em que o livro foi lido
-- Remover livros individualmente
-- Exportar a lista em formato `.json`
-- Importar uma lista previamente exportada
+- Remover livros individualmente (a imagem também é removida do Storage)
+- Exportar a lista em formato `.zip` (inclui dados e imagens locais)
+- Importar uma lista previamente exportada em `.zip`
 
 ## Preview
 
@@ -40,7 +41,6 @@ Qualquer pessoa que leia livros e queira manter um registro pessoal simples, org
 ![Bookshelf Tracker](preview/Bookshelf-1.png)
 ![Bookshelf Tracker](preview/Bookshelf-test.png)
 
-
 ## Tecnologias
 
 - Python 3.12
@@ -48,7 +48,7 @@ Qualquer pessoa que leia livros e queira manter um registro pessoal simples, org
 - HTML + CSS + JavaScript
 - pytest
 - ruff
-- Supabase (PostgreSQL)
+- Supabase (PostgreSQL + Storage)
 - Render (Deploy)
 
 ## Dependências
@@ -64,11 +64,11 @@ Qualquer pessoa que leia livros e queira manter um registro pessoal simples, org
 
 ## API
 
-Integração com [Open Library API](https://openlibrary.org/developers/api) para busca automática de capa, autor e ano de publicação a partir do título do livro.
+Integração com [Open Library API](https://openlibrary.org/developers/api) para busca automática de capa, autor e ano de publicação a partir do título do livro em inglês.
 
 ## Banco de Dados
 
-Integração com [Supabase](https://supabase.com) para persistência dos dados em nuvem (PostgreSQL).
+Integração com [Supabase](https://supabase.com) para persistência dos dados em nuvem (PostgreSQL) e armazenamento de imagens (Storage).
 
 ## Instalação e Execução
 
@@ -90,8 +90,10 @@ pip install -r requirements.txt
 ```
 
 4. Crie o arquivo `.env` na raiz do projeto:
+```bash
 SUPABASE_URL=https://seu-project-id.supabase.co
 SUPABASE_KEY=sua-publishable-key
+```
 
 5. Rode o servidor:
 ```bash
